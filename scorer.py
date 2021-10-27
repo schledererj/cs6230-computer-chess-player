@@ -8,16 +8,15 @@ class Scorer:
         pass
 
     # implementing the Simplified Evaluation Function
-
     @staticmethod
-    def evaluate(self, board: Board) -> float:
+    def evaluate(board: Board) -> float:
         _return_value = 0
         _piece_map = board.piece_map()
 
         for i in _piece_map:
-            _piece = _piece_map[i].symbol
+            _piece = _piece_map[i].symbol()
 
-            if _piece.upper() == 'K' and self._is_end_game(board):
+            if _piece.upper() == 'K' and Scorer._is_end_game(board):
                 _table = PieceSquareTable['K_EG'].value
             else:
                 _table = PieceSquareTable[_piece.upper()].value

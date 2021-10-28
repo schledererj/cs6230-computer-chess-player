@@ -9,6 +9,35 @@ class TestScorer(unittest.TestCase):
         self._scorer = scorer.Scorer()
         self._board = chess.Board()
 
+    def test_default_board_is_not_end_game(self):
+        expected = False
+        actual = self._scorer._is_end_game(self._board)
+        self.assertEqual(expected, actual)
+
+    def test_no_queens_is_end_game(self):
+        expected = True
+        board = chess.Board(fen='rnb1kbnr/8/8/8/8/8/8/RNB1KBNR')
+        actual = self._scorer._is_end_game(board)
+        self.assertEqual(expected, actual)
+
+    def test_one_queen_and_no_other_pieces_is_end_game(self):
+        expected = True
+        board = chess.Board(fen='7q/8/8/8/8/8/8/7K')
+        actual = self._scorer._is_end_game(board)
+        self.assertEqual(expected, actual)
+
+    def test_one_queen_and_one_other_piece_is_end_game(self):
+        expected = True
+        board = chess.Board(fen='6rq/8/8/8/8/8/8/7K')
+        actual = self._scorer._is_end_game(board)
+        self.assertEqual(expected, actual)
+
+    def test_one_queen_and_two_other_pieces_is_not_endgame(self):
+        expected = False
+        board = chess.Board(fen='4kbrq/8/8/8/8/8/8/7K')
+        actual = self._scorer._is_end_game(board)
+        self.assertEqual(expected, actual)
+
     def test_evaluate_initial_board(self):
         expected = 0
         actual = self._scorer.evaluate(self._board)

@@ -9,7 +9,7 @@ class Scorer:
 
     # implementing the Simplified Evaluation Function
     @staticmethod
-    def evaluate(board: Board) -> float:
+    def evaluate(board: Board) -> int:
         _return_value = 0
         _piece_map = board.piece_map()
 
@@ -48,9 +48,9 @@ class Scorer:
 
         if 'Q' not in _white_pieces and 'Q' not in _black_pieces:
             _return_value = True
-        elif 'Q' not in _white_pieces and 'Q' in _black_pieces and (len(_black_pieces) <= 2 or len([x for x in _black_pieces if x in ['B', 'N']]) <= 1):
+        elif 'Q' not in _white_pieces and 'Q' in _black_pieces and (len(_black_pieces) <= 2 or (len(_black_pieces) == 3 and len([x for x in _black_pieces if x in ['B', 'N']]) <= 1)):
             _return_value = True
-        elif 'Q' not in _black_pieces and 'Q' in _white_pieces and (len(_white_pieces) <= 2 or len([x for x in _white_pieces if x in ['B', 'N']]) <= 1):
+        elif 'Q' not in _black_pieces and 'Q' in _white_pieces and (len(_white_pieces) <= 2 or (len(_white_pieces) == 3 and len([x for x in _white_pieces if x in ['B', 'N']]) <= 1)):
             _return_value = True
         else:
             _return_value = False

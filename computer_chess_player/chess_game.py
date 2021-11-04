@@ -1,10 +1,8 @@
 import chess
-import argparse
-from numpy import number
-from random_player import RandomPlayer
+from .random_player import RandomPlayer
 from termcolor import cprint
 
-from search_player import SearchPlayer
+from .search_player import SearchPlayer
 
 
 class ChessGame:

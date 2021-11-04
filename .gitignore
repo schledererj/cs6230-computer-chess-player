@@ -3,3 +3,6 @@
 **/.ipynb_checkpoints
 **/.vscode
 *.json
+**/build
+**/dist
+*.egg-info/

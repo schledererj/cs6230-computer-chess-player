@@ -4,7 +4,7 @@ import random
 from numpy import mean
 from copy import deepcopy
 
-from scorer import Scorer
+from .scorer import Scorer
 
 
 class BoardStateTreeNode:

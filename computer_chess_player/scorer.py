@@ -1,6 +1,5 @@
-from typing import Dict
-from chess import WHITE, Board, Piece, Color, Square
-from piece_square_tables import PieceSquareTable
+from chess import Board
+from .piece_square_tables import PieceSquareTable
 
 
 class Scorer:

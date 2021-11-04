@@ -1,7 +1,7 @@
 import argparse
 import json
 from termcolor import cprint
-from chess_game import ChessGame
+from .chess_game import ChessGame
 from time import perf_counter
 import sys
 import multiprocessing
@@ -109,6 +109,8 @@ THE GAMES START NOW...
         })
 
 
-if __name__ == "__main__":
-    # Main()
+def main():
     MultiRunner()
+
+if __name__ == "__main__":
+    main()

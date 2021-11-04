@@ -1,8 +1,8 @@
 from typing import List, Tuple
-from player import Player
-from scorer import Scorer
+from .player import Player
+from .scorer import Scorer
 import chess
-from board_state_tree_node import BoardStateTreeNode
+from .board_state_tree_node import BoardStateTreeNode
 
 
 class SearchPlayer(Player):

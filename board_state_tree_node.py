@@ -26,7 +26,8 @@ class BoardStateTreeNode:
             if self._move:
                 _new_node_board.push(_move)
             _node = BoardStateTreeNode(_new_node_board, self._max_children, _move)
-            _node.populate_tree(depth - 1)
+            if not _new_node_board.is_game_over():
+                _node.populate_tree(depth - 1)
             self._children.append(_node)
 
     def evaluate_moves(self, scorer: Scorer, agg_func: Callable=mean) -> List[Tuple[float, chess.Move]]:

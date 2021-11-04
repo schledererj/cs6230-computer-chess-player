@@ -25,25 +25,27 @@ class ChessGame:
         if self._board.is_game_over():
             self.print_game_stats(True)
 
-    def print_game_stats(self, game_over_hint: bool = None) -> None:
+    def print_game_stats(self, game_over_hint: bool = None, do_print: bool = False) -> None:
         if game_over_hint or self._board.is_game_over():
-            cprint(f"""
-THE GAME IS OVER.
-THE OUTCOME IS: {self._board.outcome().termination}.
-THE WINNER IS: {"DRAW" if self._board.outcome().winner is None else ("WHITE" if self._board.outcome().winner else "BLACK")}
-THE FINAL BOARD STATE IS:
-{self._board}
-            """, "green")
+            if do_print:
+                cprint(f"""
+    THE GAME IS OVER.
+    THE OUTCOME IS: {self._board.outcome().termination}.
+    THE WINNER IS: {"DRAW" if self._board.outcome().winner is None else ("WHITE" if self._board.outcome().winner else "BLACK")}
+    THE FINAL BOARD STATE IS:
+    {self._board}
+                """, "green")
         else:
-            cprint(f"""
-THE GAME IS NOT OVER.
-THE CURRENT TURN IS: {"WHITE" if bool(self._board.turn) else "BLACK"}.
-THERE HAVE BEEN {self._board.fullmove_number} FULL MOVES THIS GAME.
-            """, "red")
+            if do_print:
+                cprint(f"""
+    THE GAME IS NOT OVER.
+    THE CURRENT TURN IS: {"WHITE" if bool(self._board.turn) else "BLACK"}.
+    THERE HAVE BEEN {self._board.fullmove_number} FULL MOVES THIS GAME.
+                """, "red")
 
     def play_until_move(self, number_of_moves: int) -> int:
         i = 0
         while not self._board.is_game_over() and i < number_of_moves * 2:
             self.play_turn()
 
-        return self._board.fullmove_number
+        return (self._board.fullmove_number, "DRAW" if self._board.outcome().winner is None else ("WHITE" if self._board.outcome().winner else "BLACK"), self._board.outcome().termination)

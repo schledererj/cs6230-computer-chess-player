@@ -7,12 +7,17 @@ import sys
 import multiprocessing
 import itertools
 
+
 class Main:
     def __init__(self):
-        parser = argparse.ArgumentParser(description="The JustLongEnough Chess Simulator, powered by AI (tm)")
-        parser.add_argument("depth", help="The max depth of the search tree", type=int)
-        parser.add_argument("max_children", help="The max number of random legal moves to pick to generate next level of the search tree", type=int)
-        parser.add_argument("--play-until", help="The maximum number of _move pairs_ to play up to", required=False, default=999, type=int)
+        parser = argparse.ArgumentParser(
+            description="The JustLongEnough Chess Simulator, powered by AI (tm)")
+        parser.add_argument(
+            "depth", help="The max depth of the search tree", type=int)
+        parser.add_argument(
+            "max_children", help="The max number of random legal moves to pick to generate next level of the search tree", type=int)
+        parser.add_argument("--play-until", help="The maximum number of _move pairs_ to play up to",
+                            required=False, default=999, type=int)
 
         args = parser.parse_args()
 
@@ -35,17 +40,20 @@ THE GAME STARTS NOW...
         move_time = run_time / float(num_moves)
         cprint(f"NUMBER OF MOVES\t\t\t {num_moves}", "yellow")
         cprint(f"GAME DURATION\t\t\t {run_time:0.4f} SECONDS", "yellow")
-        cprint(f"EACH MOVE TOOK APPROXIMATELY\t {move_time:0.4f} SECONDS", "yellow")
+        cprint(
+            f"EACH MOVE TOOK APPROXIMATELY\t {move_time:0.4f} SECONDS", "yellow")
 
-def init(args):
-    _stats = args
 
 class MultiRunner():
     def __init__(self):
-        parser = argparse.ArgumentParser(description="Runs multi-threaded Chess simulations with the JustLongEnough Chess Simulator, powered by AI (tm)")
-        parser.add_argument("up_to_depth", help="The max depth of the search tree. Will run depths of 1 up to this parameter", type=int)
-        parser.add_argument("up_to_max_children", help="The max number of random legal moves to pick to generate next level of the search tree. Will run max children of 1 up to this parameter", type=int)
-        parser.add_argument("num_games", help="The number of games to run for each variation", type=int)
+        parser = argparse.ArgumentParser(
+            description="Runs multi-threaded Chess simulations with the JustLongEnough Chess Simulator, powered by AI (tm)")
+        parser.add_argument(
+            "up_to_depth", help="The max depth of the search tree. Will run depths of 1 up to this parameter", type=int)
+        parser.add_argument(
+            "up_to_max_children", help="The max number of random legal moves to pick to generate next level of the search tree. Will run max children of 1 up to this parameter", type=int)
+        parser.add_argument(
+            "num_games", help="The number of games to run for each variation", type=int)
 
         args = parser.parse_args()
 
@@ -69,7 +77,8 @@ THE GAMES START NOW...
         cpu_count = multiprocessing.cpu_count()
         depth_range = range(1, up_to_depth + 1)
         children_range = range(1, up_to_max_children + 1)
-        arg_permutations = [(x[0], x[1]) for x in itertools.product(depth_range, children_range)] * num_games
+        arg_permutations = [(x[0], x[1]) for x in itertools.product(
+            depth_range, children_range)] * num_games
 
         manager = multiprocessing.Manager()
         self.stats = manager.list()
@@ -85,7 +94,8 @@ THE GAMES START NOW...
         end_time = perf_counter()
         run_time = end_time - start_time
         move_time = run_time / float(num_moves)
-        self._put_stats(depth, max_children, run_time, move_time, num_moves, winner, termination)
+        self._put_stats(depth, max_children, run_time,
+                        move_time, num_moves, winner, termination)
 
     def _put_stats(self, depth, max_children, run_time, move_time, num_moves, winner, termination):
         self.stats.append({
@@ -97,6 +107,7 @@ THE GAMES START NOW...
             "winner": winner,
             "termination": str(termination)
         })
+
 
 if __name__ == "__main__":
     # Main()

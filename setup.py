@@ -8,7 +8,8 @@ setup(name='computer-chess-player',
       packages=find_packages(),
       install_requires=[
           "python-chess==1.999",
-          "termcolor==1.1.0"
+          "termcolor==1.1.0",
+          "numpy==1.21.4"
       ],
       entry_points={
           "console_scripts": [
